@@ -33,7 +33,6 @@ theme = 'hugo-theme-re-terminal'
 
     [languages.en.params.logo]
       logoText = "aniviaflome:~$ "
-      logoHomeLink = "/"
 
   [languages.en.menu]
 
