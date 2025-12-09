@@ -30,7 +30,7 @@ jobs:
         with:
           cache: false
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
