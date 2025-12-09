@@ -28,7 +28,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           cache: false
       - name: Setup Node.js
