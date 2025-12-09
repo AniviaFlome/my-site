@@ -1,0 +1,49 @@
+baseURL = 'https://aniviaflome.github.io/my-site/'
+languageCode = 'en-us'
+title = 'My Terminal Site'
+theme = 'hugo-theme-re-terminal'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  category = "notes"
+  tag = "tags"
+
+[params]
+  contentTypeName = "posts"
+  themeColor = "catppuccin-mocha-mauve"
+  showMenuItems = 3
+  fullWidthTheme = false
+  centerTheme = true
+  runningText = "Running..."
+  
+  [params.banner]
+    dismissible = true
+    text = "Welcome to my terminal!"
+
+[languages]
+  [languages.en.params]
+    title = "aniviaflome@linux"
+    subtitle = "Personal Homepage"
+    readMore = "Read"
+    readOtherPosts = "More Notes"
+
+    [languages.en.params.logo]
+      logoText = "aniviaflome:~$ "
+      logoHomeLink = "/"
+
+  [languages.en.menu]
+
+    [[languages.en.menu.main]]
+      identifier = "home"
+      name = "Home"
+      url = "/"
+      weight = 10
+    [[languages.en.menu.main]]
+      identifier = "notes"
+      name = "Notes"
+      url = "/notes"
+      weight = 20

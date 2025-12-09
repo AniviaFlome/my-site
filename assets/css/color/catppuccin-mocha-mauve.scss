@@ -1,0 +1,18 @@
+$theme-color: #cba6f7;
+$background: #1e1e2e;
+
+:root {
+    --background: #1e1e2e;
+    --color: #cba6f7;
+    --accent: #cba6f7;
+    --accent-contrast-color: #1e1e2e;
+}
+
+.text-main {
+    color: var(--accent);
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--accent-contrast-color);
+}
