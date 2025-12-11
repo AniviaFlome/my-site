@@ -15,14 +15,10 @@ theme = 'hugo-theme-re-terminal'
 [params]
   contentTypeName = "posts"
   themeColor = "catppuccin-mocha-mauve"
-  showMenuItems = 3
+  showMenuItems = 5
   fullWidthTheme = false
   centerTheme = true
   runningText = "Running..."
-  
-  [params.banner]
-    dismissible = true
-    text = "Welcome to my terminal!"
 
 [languages]
   [languages.en.params]
@@ -46,3 +42,8 @@ theme = 'hugo-theme-re-terminal'
       name = "Notes"
       url = "/notes"
       weight = 20
+    [[languages.en.menu.main]]
+      identifier = "media"
+      name = "Media"
+      url = "/media"
+      weight = 30

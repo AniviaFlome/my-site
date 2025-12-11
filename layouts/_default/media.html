@@ -1,0 +1,38 @@
+{{ define "main" }}
+<div class="media-page media-hub">
+    <div class="index-content">
+        {{ with .Content }}{{ . }}{{ end }}
+    </div>
+
+    <div class="media-categories">
+        {{ $anime := $.Site.Data.anime }}
+        {{ $manga := $.Site.Data.manga }}
+        {{ $shows := $.Site.Data.shows }}
+        {{ $movies := $.Site.Data.movies }}
+
+        <a href="{{ .Site.BaseURL }}media/anime/" class="category-card">
+            <span class="category-icon">🎌</span>
+            <span class="category-name">Anime</span>
+            <span class="category-count">{{ with $anime }}{{ .totalCount }}{{ else }}0{{ end }} titles</span>
+        </a>
+
+        <a href="{{ .Site.BaseURL }}media/manga/" class="category-card">
+            <span class="category-icon">📚</span>
+            <span class="category-name">Manga</span>
+            <span class="category-count">{{ with $manga }}{{ .totalCount }}{{ else }}0{{ end }} titles</span>
+        </a>
+
+        <a href="{{ .Site.BaseURL }}media/shows/" class="category-card">
+            <span class="category-icon">📺</span>
+            <span class="category-name">TV Shows</span>
+            <span class="category-count">{{ with $shows }}{{ .totalCount }}{{ else }}0{{ end }} shows</span>
+        </a>
+
+        <a href="{{ .Site.BaseURL }}media/movies/" class="category-card">
+            <span class="category-icon">🎬</span>
+            <span class="category-name">Movies</span>
+            <span class="category-count">{{ with $movies }}{{ .totalCount }}{{ else }}0{{ end }} movies</span>
+        </a>
+    </div>
+</div>
+{{ end }}

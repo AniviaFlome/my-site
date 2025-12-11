@@ -1,0 +1,78 @@
+{
+  "username": "AniviaFlome",
+  "categories": [
+    {
+      "status": "watched",
+      "displayName": "Watched",
+      "order": 1,
+      "entries": [
+        {
+          "id": 191569,
+          "title": "Berlin",
+          "year": 2023,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/berlin-2023"
+        },
+        {
+          "id": 59660,
+          "title": "Better Call Saul",
+          "year": 2015,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/better-call-saul"
+        },
+        {
+          "id": 60730,
+          "title": "BoJack Horseman",
+          "year": 2014,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/bojack-horseman"
+        },
+        {
+          "id": 81274,
+          "title": "F is for Family",
+          "year": 2015,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/f-is-for-family"
+        },
+        {
+          "id": 118572,
+          "title": "Money Heist",
+          "year": 2017,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/money-heist"
+        },
+        {
+          "id": 69829,
+          "title": "Rick and Morty",
+          "year": 2013,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/rick-and-morty"
+        },
+        {
+          "id": 195553,
+          "title": "Rick and Morty: The Anime",
+          "year": 2024,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/rick-and-morty-the-anime"
+        },
+        {
+          "id": 104439,
+          "title": "Stranger Things",
+          "year": 2016,
+          "posterImage": "",
+          "rating": 0,
+          "url": "https://trakt.tv/shows/stranger-things"
+        }
+      ],
+      "count": 8
+    }
+  ],
+  "totalCount": 8
+}
