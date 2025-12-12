@@ -1,6 +1,6 @@
 baseURL = 'https://aniviaflome.github.io/my-site/'
 languageCode = 'en-us'
-title = 'My Terminal Site'
+title = 'AniviaFlome\'s Site'
 theme = 'hugo-theme-re-terminal'
 
 [markup]
