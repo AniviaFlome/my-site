@@ -4,39 +4,18 @@
         {{ with .Content }}{{ . }}{{ end }}
     </div>
 
-    {{ $data := $.Site.Data.shows }}
-    {{ if $data }}
-    <div class="page-stats">
-        <span class="stat-item">{{ $data.totalCount }} shows</span>
-        <span class="stat-item">
-            <a href="https://trakt.tv/users/{{ $data.username }}/lists" target="_blank" rel="noopener">Trakt ↗</a>
-        </span>
-    </div>
-
-    {{ range $data.categories }}
-    <section class="media-section">
-        <h2 class="section-title">{{ .displayName }} <span class="section-count">({{ .count }})</span></h2>
-        <div class="media-grid">
-            {{ range .entries }}
-            <a href="{{ .url }}" target="_blank" rel="noopener" class="media-card" title="{{ .title }}">
-                <div class="media-cover">
-                    {{ if .posterImage }}<img src="{{ .posterImage }}" alt="{{ .title }}" loading="lazy" />
-                    {{ else }}<div class="media-placeholder">{{ .title | truncate 20 }}</div>{{ end }}
-                    {{ if gt .rating 0.0 }}<span class="media-score">★ {{ printf "%.1f" .rating }}</span>{{ end }}
-                </div>
-                <div class="media-info">
-                    <h3 class="media-title">{{ .title }}</h3>
-                    {{ with .year }}<div class="media-progress">{{ . }}</div>{{ end }}
-                </div>
-            </a>
-            {{ end }}
+    <div id="shows-container">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading TV shows...</p>
         </div>
-    </section>
-    {{ end }}
-    {{ else }}
-    <div class="no-data">
-        <p>No TV shows data yet. Set TRAKT_CLIENT_ID to fetch data.</p>
     </div>
-    {{ end }}
 </div>
+
+<script src="/js/media-loader.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        MediaLoader.loadShows('shows-container');
+    });
+</script>
 {{ end }}

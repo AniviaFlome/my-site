@@ -6,47 +6,18 @@
         {{ end }}
     </div>
 
-    {{ $data := $.Site.Data.manga }}
-    {{ if $data }}
-    <div class="page-stats">
-        <span class="stat-item">{{ $data.totalCount }} titles</span>
-        <span class="stat-item">
-            <a href="https://anilist.co/user/{{ $data.username }}/mangalist" target="_blank" rel="noopener">
-                AniList ↗
-            </a>
-        </span>
-    </div>
-
-    {{ range $data.categories }}
-    <section class="media-section">
-        <h2 class="section-title">
-            {{ .displayName }}
-            <span class="section-count">({{ .count }})</span>
-        </h2>
-        <div class="media-grid">
-            {{ range .entries }}
-            <a href="{{ .url }}" target="_blank" rel="noopener" class="media-card" title="{{ .title }}">
-                <div class="media-cover">
-                    <img src="{{ .coverImage }}" alt="{{ .title }}" loading="lazy" />
-                    {{ if gt .score 0 }}
-                    <span class="media-score">★ {{ .score }}</span>
-                    {{ end }}
-                </div>
-                <div class="media-info">
-                    <h3 class="media-title">{{ .title }}</h3>
-                    <div class="media-progress">
-                        {{ .progress }}{{ with .chapters }}/{{ . }}{{ end }} ch
-                    </div>
-                </div>
-            </a>
-            {{ end }}
+    <div id="manga-container">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading manga...</p>
         </div>
-    </section>
-    {{ end }}
-    {{ else }}
-    <div class="no-data">
-        <p>No manga data available yet.</p>
     </div>
-    {{ end }}
 </div>
+
+<script src="/js/media-loader.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        MediaLoader.loadManga('manga-container');
+    });
+</script>
 {{ end }}
