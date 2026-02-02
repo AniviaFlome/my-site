@@ -42,8 +42,3 @@ theme = 'hugo-theme-re-terminal'
       name = "Notes"
       url = "/notes"
       weight = 20
-    [[languages.en.menu.main]]
-      identifier = "media"
-      name = "Media"
-      url = "/media"
-      weight = 30
