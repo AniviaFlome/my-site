@@ -35,8 +35,6 @@
 
     {{ partial "cover.html" . }}
 
-    <!-- Content preview hidden -->
-
     {{ if not .Params.showFullContent }}
     <div>
       <a class="read-more button" href="{{.RelPermalink}}">{{ $.Site.Params.ReadMore }} →</a>

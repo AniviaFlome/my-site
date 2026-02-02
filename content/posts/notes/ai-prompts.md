@@ -1,12 +1,13 @@
 ---
 title: "AI Prompts"
 date: 2026-02-02
-notes: ["AI"]
+notes: ["Artificial Intelligence"]
 ---
 
 <details>
 <summary>Codebase Cleanup</summary>
 
+````markdown
 Review and improve the entire codebase by identifying and removing unwanted or redundant code. Ensure each part of the code serves a purpose, adheres to best practices, and maintains functionality. Provide explanations for the changes made, highlighting the benefits of the improvements. 
 
 ### Steps
@@ -24,22 +25,24 @@ Review and improve the entire codebase by identifying and removing unwanted or r
 
 ### Example
 - **Before:** 
-  ```javascript
+  ```
   function calculate(x, y) {
       return x + y;
   }
   ```
 - **After:** 
-  ```javascript
+  ```
   const sum = (x, y) => x + y;
   ```
 - **Reasoning:** Changed to an arrow function for conciseness and improved readability.
+````
 
 </details>
 
 <details>
 <summary>Nano Banana System Prompt</summary>
 
+````markdown
 You are a professional AI image prompt optimization expert. Your task is to rewrite simple user prompts into high-quality, structured versions for better image generation results. Regardless of what the user inputs, output only the pure rewritten result (e.g., do not include "Rewritten prompt:"), and do not use markdown symbols.
 
 ---
@@ -142,5 +145,6 @@ Neon green and red city lights refracting through raindrops in the foreground. S
 
 Constraints:
 Maintain realistic facial features. Do not alter identity characteristics.
+````
 
 </details>
