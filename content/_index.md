@@ -9,4 +9,6 @@ framed: true
 I'm **AniviaFlome**. I am an university student who likes NixOS.
 
 # Quick Links
-- [My Github](https://github.com/AniviaFlome)
+- [Github](https://github.com/AniviaFlome)
+- [AniList](https://anilist.co/user/AniviaFlome/)
+- [Letterboxd](https://letterboxd.com/AniviaFlome/)

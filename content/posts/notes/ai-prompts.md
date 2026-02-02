@@ -1,6 +1,6 @@
 ---
 title: "AI Prompts"
-date: 2026-02-03
+date: 2026-02-02
 notes: ["AI"]
 ---
 
