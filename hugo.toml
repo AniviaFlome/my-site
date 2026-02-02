@@ -1,4 +1,4 @@
-baseURL = 'https://aniviaflome.github.io/my-site/'
+baseURL = '/'
 languageCode = 'en-us'
 title = "AniviaFlome's Site"
 theme = 'hugo-theme-re-terminal'
