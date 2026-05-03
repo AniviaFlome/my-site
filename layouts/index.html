@@ -2,9 +2,15 @@
 {{ if .Content }}
 <div class="index-content {{ if .Params.framed -}}framed{{- end -}}">
   {{ .Content }}
+  <h2 id="quick-links">Quick Links</h2>
+  <ul>
+  {{ range .Site.Params.links }}
+    <li><a href="{{ .url }}">{{ .name }}</a></li>
+  {{ end }}
+  </ul>
 </div>
 {{ end }}
+{{ partial "music-player.html" . }}
 <div class="posts">
-  <!-- Post list hidden on homepage as requested -->
 </div>
 {{ end }}

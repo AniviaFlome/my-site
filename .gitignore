@@ -1,7 +1,7 @@
-.DS_Store
 .env
 .hugo_build.lock
+.wrangler
+__pycache__
 node_modules/
 public/
 resources/_gen/
-Thumbs.db

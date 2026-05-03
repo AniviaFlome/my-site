@@ -3,6 +3,20 @@ languageCode = 'en-us'
 title = "AniviaFlome's Site"
 theme = 'hugo-theme-re-terminal'
 
+[outputFormats.Text]
+mediaType = "text/plain"
+baseName = "index"
+isPlainText = true
+
+[outputFormats.RSS]
+baseName = "rss"
+
+[outputs]
+page = ["HTML"]
+home = ["HTML", "RSS"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -19,6 +33,20 @@ theme = 'hugo-theme-re-terminal'
   fullWidthTheme = false
   centerTheme = true
   runningText = "Running..."
+  about = "I'm AniviaFlome. I am an university student who likes NixOS."
+
+  [[params.links]]
+    name = "Github"
+    url = "https://github.com/AniviaFlome"
+  [[params.links]]
+    name = "AniList"
+    url = "https://anilist.co/user/AniviaFlome/"
+  [[params.links]]
+    name = "Letterboxd"
+    url = "https://letterboxd.com/AniviaFlome/"
+  [[params.links]]
+    name = "Serializd"
+    url = "https://www.serializd.com/user/AniviaFlome/profile"
 
 [languages]
   [languages.en.params]

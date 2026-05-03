@@ -1,0 +1,21 @@
+{{- $m := "[35m" -}}
+{{- $p := "[38;5;219m" -}}
+{{- $b := "[38;5;117m" -}}
+{{- $g := "[32m" -}}
+{{- $bd := "[1m" -}}
+{{- $d := "[2m" -}}
+{{- $r := "[0m" -}}
+{{- $w := 42 -}}
+{{$bd}}{{$m}}+{{strings.Repeat $w "="}}+{{$r}}
+  {{$bd}}{{$p}}{{.Site.Title}}{{$r}}
+  {{$d}}{{.Site.Params.subtitle}}{{$r}}
+{{$bd}}{{$m}}+{{strings.Repeat $w "="}}+{{$r}}
+
+  {{$bd}}{{$g}}About{{$r}}
+  {{$d}}{{.Site.Params.about}}{{$r}}
+
+  {{$bd}}{{$g}}Links{{$r}}
+{{- range .Site.Params.links }}
+    {{$p}}>{{$r}} {{$b}}{{.name}}{{$r}}
+      {{$d}}{{.url}}{{$r}}
+{{- end }}

@@ -1,0 +1,342 @@
+{{ $songs := hugo.Data.songs }}
+<div id="musicplayer">
+  <div id="mp-songtitle">loading...</div>
+
+  <div id="mp-controls">
+    <div id="mp-prev"><i class="fas fa-backward"></i></div>
+    <div id="mp-playpause"><i class="fas fa-play" id="mp-playicon"></i></div>
+    <div id="mp-next"><i class="fas fa-forward"></i></div>
+  </div>
+
+  <div id="mp-seeking">
+    <div id="mp-current">0:00</div>
+    <div id="mp-bar-wrap">
+      <div id="mp-bar-fill"></div>
+      <input type="range" min="0" max="1000" value="0" id="mp-seek">
+    </div>
+    <div id="mp-duration">0:00</div>
+  </div>
+
+  <div id="mp-player-wrap">
+    <div id="mp-ytplayer"></div>
+  </div>
+</div>
+
+<style>
+#musicplayer {
+  background: #181825;
+  border: 2px solid #cba6f7;
+  margin-top: 1.5em;
+  padding: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+#musicplayer * {
+  box-sizing: border-box;
+}
+#mp-songtitle {
+  display: block;
+  padding: 6px 8px;
+  border-bottom: 2px solid #cba6f7;
+  color: #cba6f7;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #181825;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#mp-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  background: #1e1e2e;
+}
+#mp-prev, #mp-playpause, #mp-next {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  color: #cba6f7;
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+#mp-prev:hover, #mp-playpause:hover, #mp-next:hover {
+  color: #f5c2e7;
+}
+#mp-playpause {
+  padding: 4px 14px;
+}
+#mp-seeking {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px 10px 8px;
+  background: #1e1e2e;
+  gap: 8px;
+}
+#mp-current, #mp-duration {
+  color: #a6adc8;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.4rem;
+  text-align: center;
+  display: inline-block;
+}
+#mp-bar-wrap {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  background: #45475a;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#mp-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #cba6f7;
+  border-radius: 2px;
+  width: 0%;
+  transition: none;
+  pointer-events: none;
+}
+#mp-seek {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  z-index: 2;
+  opacity: 0;
+}
+#mp-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+#mp-seek::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
+  background: transparent;
+}
+#mp-bar-wrap:hover #mp-bar-fill {
+  background: #f5c2e7;
+}
+#mp-bar-wrap:hover {
+  height: 6px;
+}
+#mp-player-wrap {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+#mp-ytplayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<script>
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var ALL_SONGS = [
+  {{ range $i, $s := $songs }}{{ if $i }},{{ end }}{
+    name: {{ (printf "%s — %s" $s.name $s.artist) | jsonify | safeJS }},
+    yt_id: {{ $s.yt_id | jsonify | safeJS }},
+    duration_ms: {{ $s.duration_ms }}
+  }{{ end }}
+];
+
+function shuffleArray(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+var queue = shuffleArray(ALL_SONGS.slice());
+var track_index = 0;
+var isPlaying = false;
+var player = null;
+var playerReady = false;
+var updateTimer = null;
+
+var track_name = document.getElementById('mp-songtitle');
+var playpause_btn = document.getElementById('mp-playpause');
+var play_icon = document.getElementById('mp-playicon');
+var seek_slider = document.getElementById('mp-seek');
+var bar_fill = document.getElementById('mp-bar-fill');
+var bar_wrap = document.getElementById('mp-bar-wrap');
+var curr_time = document.getElementById('mp-current');
+var total_duration = document.getElementById('mp-duration');
+var prev_btn = document.getElementById('mp-prev');
+var next_btn = document.getElementById('mp-next');
+
+function fmt(ms) {
+  var s = Math.floor(ms / 1000);
+  var m = Math.floor(s / 60);
+  var sec = s % 60;
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function loadTrack(index) {
+  track_index = index;
+  var t = queue[track_index];
+  track_name.textContent = 'playing ' + (track_index + 1) + '/' + queue.length + ': ' + t.name;
+  total_duration.textContent = fmt(t.duration_ms);
+  curr_time.textContent = '0:00';
+  seek_slider.value = 0;
+  bar_fill.style.width = '0%';
+  if (player && playerReady) {
+    player.loadVideoById(t.yt_id);
+  }
+}
+
+function mpPlay() {
+  if (player && playerReady) {
+    player.playVideo();
+  }
+}
+
+function mpPause() {
+  if (player && playerReady) {
+    player.pauseVideo();
+  }
+}
+
+function mpToggle() {
+  if (isPlaying) mpPause();
+  else mpPlay();
+}
+
+function mpNext() {
+  if (track_index < queue.length - 1) {
+    track_index += 1;
+  } else {
+    queue = shuffleArray(ALL_SONGS.slice());
+    track_index = 0;
+  }
+  loadTrack(track_index);
+}
+
+function mpPrev() {
+  if (track_index > 0) {
+    track_index -= 1;
+  } else {
+    track_index = queue.length - 1;
+  }
+  loadTrack(track_index);
+}
+
+function seekUpdate() {
+  if (!player || !playerReady) return;
+  var cur = player.getCurrentTime();
+  var dur = player.getDuration();
+  if (dur && dur > 0) {
+    var pct = (cur / dur) * 100;
+    seek_slider.value = Math.round(pct * 10);
+    bar_fill.style.width = pct + '%';
+    var curMs = Math.floor(cur * 1000);
+    curr_time.textContent = fmt(curMs);
+  }
+}
+
+function startSeekTimer() {
+  stopSeekTimer();
+  updateTimer = setInterval(seekUpdate, 500);
+}
+
+function stopSeekTimer() {
+  if (updateTimer) {
+    clearInterval(updateTimer);
+    updateTimer = null;
+  }
+}
+
+playpause_btn.addEventListener('click', mpToggle);
+prev_btn.addEventListener('click', mpPrev);
+next_btn.addEventListener('click', mpNext);
+seek_slider.addEventListener('input', function() {
+  if (!player || !playerReady) return;
+  var dur = player.getDuration();
+  if (dur && dur > 0) {
+    var pct = seek_slider.value / 1000;
+    bar_fill.style.width = (pct * 100) + '%';
+    player.seekTo(pct * dur, true);
+  }
+});
+
+function onPlayerReady(event) {
+  playerReady = true;
+  player.setPlaybackQuality('small');
+  loadTrack(0);
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    isPlaying = true;
+    play_icon.className = 'fas fa-pause';
+    player.setPlaybackQuality('small');
+    startSeekTimer();
+  } else if (event.data == YT.PlayerState.PAUSED) {
+    isPlaying = false;
+    play_icon.className = 'fas fa-play';
+    stopSeekTimer();
+  } else if (event.data == YT.PlayerState.ENDED) {
+    isPlaying = false;
+    play_icon.className = 'fas fa-play';
+    stopSeekTimer();
+    bar_fill.style.transition = 'none';
+    mpNext();
+    requestAnimationFrame(function() { bar_fill.style.transition = ''; });
+  } else {
+    stopSeekTimer();
+  }
+}
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('mp-ytplayer', {
+    height: '1',
+    width: '1',
+    videoId: queue[0].yt_id,
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      modestbranding: 1,
+      rel: 0,
+      showinfo: 0,
+      iv_load_policy: 3,
+      disablekb: 1
+    },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
+}
+</script>
