@@ -18,55 +18,55 @@ section = ["HTML", "RSS"]
 taxonomy = ["HTML", "RSS"]
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 
 [taxonomies]
-  category = "notes"
-  tag = "tags"
+category = "notes"
+tag = "tags"
 
 [params]
-  contentTypeName = "posts"
-  themeColor = "catppuccin-mocha-mauve"
-  showMenuItems = 5
-  fullWidthTheme = false
-  centerTheme = true
-  runningText = "Running..."
-  about = "I'm AniviaFlome. I am an university student who likes NixOS."
+contentTypeName = "posts"
+themeColor = "catppuccin-mocha-mauve"
+showMenuItems = 5
+fullWidthTheme = false
+centerTheme = true
+runningText = "Running..."
+about = "I'm AniviaFlome. I am an university student who likes NixOS."
 
-  [[params.links]]
-    name = "Github"
-    url = "https://github.com/AniviaFlome"
-  [[params.links]]
-    name = "AniList"
-    url = "https://anilist.co/user/AniviaFlome/"
-  [[params.links]]
-    name = "Letterboxd"
-    url = "https://letterboxd.com/AniviaFlome/"
-  [[params.links]]
-    name = "Serializd"
-    url = "https://www.serializd.com/user/AniviaFlome/profile"
+[[params.links]]
+name = "Github"
+url = "https://github.com/AniviaFlome"
+[[params.links]]
+name = "AniList"
+url = "https://anilist.co/user/AniviaFlome/"
+[[params.links]]
+name = "Letterboxd"
+url = "https://letterboxd.com/AniviaFlome/"
+[[params.links]]
+name = "Serializd"
+url = "https://www.serializd.com/user/AniviaFlome/profile"
 
 [languages]
-  [languages.en.params]
-    title = "aniviaflome@linux"
-    subtitle = "Personal Homepage"
-    readMore = "Read"
-    readOtherPosts = "More Notes"
+[languages.en.params]
+title = "aniviaflome@linux"
+subtitle = "Personal Homepage"
+readMore = "Read"
+readOtherPosts = "More Notes"
 
-    [languages.en.params.logo]
-      logoText = "aniviaflome:~$ "
+[languages.en.params.logo]
+logoText = "aniviaflome:~$ "
 
-  [languages.en.menu]
+[languages.en.menu]
 
-    [[languages.en.menu.main]]
-      identifier = "home"
-      name = "Home"
-      url = "/"
-      weight = 10
-    [[languages.en.menu.main]]
-      identifier = "notes"
-      name = "Notes"
-      url = "/notes"
-      weight = 20
+[[languages.en.menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = 10
+[[languages.en.menu.main]]
+identifier = "notes"
+name = "Notes"
+url = "/notes"
+weight = 20

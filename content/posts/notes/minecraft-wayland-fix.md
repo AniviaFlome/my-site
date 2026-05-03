@@ -9,9 +9,9 @@ Add this to your java arguments:
 
 There are some mods for Wayland support:
 
-Forge: 
+Forge:
 [WayFix](https://github.com/not-coded/WayFix)
 
-Fabric: 
+Fabric:
 [WayFix](https://github.com/not-coded/WayFix)
 [Wayland Fix](https://github.com/StackDoubleFlow/MCWaylandFix)

@@ -6,4 +6,4 @@ framed: true
 
 # Homepage
 
-I'm **AniviaFlome**. I am an university student who likes NixOS.
+I am an university student who likes NixOS.
